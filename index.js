@@ -1,4 +1,4 @@
-import { process } from "./env.js"
+// import { process } from "./env.js"
 
 const setupTextarea = document.getElementById('setup-textarea') 
 const setupInputContainer = document.getElementById('setup-input-container')
@@ -7,8 +7,8 @@ const movieBossText = document.getElementById('movie-boss-text')
 
 
 function setBotReply(prompt) {
-    // const apiKey = "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"
-    const apiKey = process.env.OPEN_API_KEY
+    const apiKey = "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"
+    // const apiKey = process.env.OPEN_API_KEY
     const apiUrl = "https://api.openai.com/v1/chat/completions"
 
 
@@ -31,7 +31,24 @@ function setBotReply(prompt) {
         .then(data => {
           // Handle the response data
           console.log(data);
-          movieBossText.innerText = data.choices[0].message.content
+          movieBossText.innerText = data.choices[0].message.content.trim()
+
+          setupInputContainer.innerHTML = `<textarea id="setup-textarea" placeholder="An evil genius wants to take over the world using AI."></textarea>
+          <button class="send-btn" id="send-btn" aria-label="send">
+                  <img src="images/arrow.png" alt="send">
+          </button>`
+
+          document.getElementById("send-btn").addEventListener("click", () => {
+            if (setupTextarea.value) {
+              setupInputContainer.innerHTML = `<img src="/images/loading.svg" class="loading" id="loading">`
+              movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
+              setBotReply(setupTextarea.value)
+              
+            }
+           
+          
+          })
+         
 
         })
         .catch(error => {
@@ -48,8 +65,10 @@ document.getElementById("send-btn").addEventListener("click", () => {
     setupInputContainer.innerHTML = `<img src="/images/loading.svg" class="loading" id="loading">`
     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
     setBotReply(setupTextarea.value)
+    
   }
+ 
 
-    // setBotReply(setupTextarea.value)
+
 
 })
