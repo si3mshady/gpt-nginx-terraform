@@ -1,6 +1,3 @@
-
-
-
 const setupTextarea = document.getElementById('setup-textarea') 
 const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
@@ -11,7 +8,7 @@ function setBotReply(prompt) {
 
     const apiKey = ''
    
-    // const apiKey = process.env.OPEN_API_KEY
+   
     const apiUrl = "https://api.openai.com/v1/chat/completions"
 
 
@@ -32,7 +29,7 @@ function setBotReply(prompt) {
     fetch(apiUrl, requestOptions)
         .then(response => response.json())
         .then(data => {
-          // Handle the response data
+         
           console.log(data);
           movieBossText.innerText = data.choices[0].message.content.trim()
 
@@ -55,7 +52,7 @@ function setBotReply(prompt) {
 
         })
         .catch(error => {
-          // Handle any errors
+   
           console.error(error);
         });
     
