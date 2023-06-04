@@ -11,7 +11,7 @@ const movieBossText = document.getElementById('movie-boss-text')
 
 function setBotReply(prompt) {
 
-    const apiKey = process.env.API_KEY; 
+    const apiKey = ''
    
     // const apiKey = process.env.OPEN_API_KEY
     const apiUrl = "https://api.openai.com/v1/chat/completions"
