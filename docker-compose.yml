@@ -11,6 +11,8 @@ services:
     depends_on:
       - app1
       - app2
+    networks:
+      - gpt
 
   app1:
     restart: always
@@ -18,10 +20,18 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8080
+    networks:
+      - gpt
 
   app2:
     restart: always
     image: si3mshady/awsthree:4
     ports:
-      - 3000:3000
+      - 3000
+    networks:
+      - gpt
+
+networks:
+  gpt:
+    driver: bridge
