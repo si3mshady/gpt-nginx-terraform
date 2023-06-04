@@ -1,17 +1,14 @@
-# Use a lightweight Node.js image as the base
-FROM node:14-alpine
+# Use a lightweight Nginx image as the base
+FROM nginx:1.21-alpine
 
-# Set the working directory inside the container
-WORKDIR /app
+# Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy the application files to the container
-COPY index.html index.js index.css /app/
+# Copy your app's files to the Nginx document root
+COPY . /usr/share/nginx/html
 
-# Expose the desired port (e.g., 8080)
-EXPOSE 8080
+# Expose the desired port (e.g., 80)
+EXPOSE 80
 
-# Install any dependencies (if your application requires)
-# RUN npm install
-
-# Define the command to run your application
-CMD ["node", "index.js"]
+# Start the Nginx server
+CMD ["nginx", "-g", "daemon off;"]
