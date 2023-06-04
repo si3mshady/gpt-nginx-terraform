@@ -1,5 +1,8 @@
 // import { process } from "./env.js"
 
+
+
+
 const setupTextarea = document.getElementById('setup-textarea') 
 const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
@@ -7,7 +10,9 @@ const movieBossText = document.getElementById('movie-boss-text')
 
 
 function setBotReply(prompt) {
-    const apiKey = "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"
+
+    const apiKey = process.env.API_KEY; 
+   
     // const apiKey = process.env.OPEN_API_KEY
     const apiUrl = "https://api.openai.com/v1/chat/completions"
 
@@ -58,8 +63,6 @@ function setBotReply(prompt) {
     
 }
 
-
-
 document.getElementById("send-btn").addEventListener("click", () => {
   if (setupTextarea.value) {
     setupInputContainer.innerHTML = `<img src="/images/loading.svg" class="loading" id="loading">`
@@ -68,7 +71,4 @@ document.getElementById("send-btn").addEventListener("click", () => {
     
   }
  
-
-
-
 })
